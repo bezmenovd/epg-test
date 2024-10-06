@@ -21,11 +21,15 @@ class OrderTest extends TestCase
     {
         (new DatabaseSeeder)->run();
 
-        $order = Order::query()->first();
+        $order = Order::query()->with('products')->first();
+
+        // dd($order->products, $order->total, OrderResource::make($order)->toArray(new Request()));
         
-        $response = $this->get(route("orders.get", $order));
+        $response = $this->get(route("orders.get", ['order' => $order]));
 
         $response->assertStatus(200);
-        $response->assertJson(OrderResource::make($order)->toArray(new Request()));
+        $response->assertJson([
+            'data' => OrderResource::make($order)->toArray(new Request())
+        ]);
     }
 }

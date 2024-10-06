@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     use HasFactory;
-
+    
     protected $appends = [
         "total",
     ];
@@ -32,6 +32,6 @@ class Order extends Model
 
     public function getTotalAttribute(): float
     {
-        return array_reduce($this->products->all(), fn($price, OrderProduct $op) => $price + $op->total);
+        return array_reduce($this->products->all(), fn($price, OrderProduct $op) => $price + $op->total, 0);
     }
 }

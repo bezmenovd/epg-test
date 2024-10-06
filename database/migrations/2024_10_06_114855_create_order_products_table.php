@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId("order_id")->references("id")->on('orders')->cascadeOnDelete();
             $table->string('name');
             $table->decimal("price");
+            $table->integer("quantity");
             $table->decimal("discount_percent")->default(0);
             $table->timestamps();
         });
