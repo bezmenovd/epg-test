@@ -35,6 +35,6 @@ class OrderProduct extends Model
 
     public function getTotalAttribute(): float
     {
-        return $this->price * (100 - $this->discount_percent);
+        return $this->price * $this->quantity * (100 - $this->discount_percent);
     }
 }
