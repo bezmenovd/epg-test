@@ -22,8 +22,6 @@ class OrderTest extends TestCase
         (new DatabaseSeeder)->run();
 
         $order = Order::query()->with('products')->first();
-
-        // dd($order->products, $order->total, OrderResource::make($order)->toArray(new Request()));
         
         $response = $this->get(route("orders.get", ['order' => $order]));
 
